@@ -1,7 +1,5 @@
-# docker-gitlab-ci-runner-php5.6
-
 FROM bobey/docker-gitlab-ci-runner-php
-MAINTAINER  Olivier Balais "obalais@gmail.com"
+MAINTAINER  Matt Stein "matt@workingconcept.com"
 
 ENV PHP_VERSION 5.6.6
 
@@ -16,5 +14,8 @@ RUN yes '' | pecl install \
 	mongo \
 	redis \
 	memcache \
-	ssh2-0.12 \
-	xdebug
+	ssh2-0.12
+
+RUN apt-get update && apt-get install -y firefox xvfb
+RUN sudo a2enmod rewrite headers php5 suexec expires
+RUN sudo service apache2 restart
